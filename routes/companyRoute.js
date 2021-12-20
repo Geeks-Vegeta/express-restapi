@@ -40,8 +40,10 @@ companyRoute.get("/all", async(req, res)=>{
 
 
 companyRoute.delete("/delete/:id", async(req, res)=>{
-    const company_id = req.params.id;
+    
     try {
+        const company_id = req.params.id;
+
         const company = await companyModel.findByIdAndDelete({"_id": company_id });
         res.send(company);
         
@@ -54,8 +56,10 @@ companyRoute.delete("/delete/:id", async(req, res)=>{
 
 companyRoute.get("/allemployees/:name", async(req, res)=>{
 
-    const name = req.params.name;
+    
     try {
+        const name = req.params.name;
+
         const employees = await companyModel.findOne({"name": name}).populate('employees');
         if(!employees) return res.status(404).json({"message": "No such Company exists"});
 
@@ -70,9 +74,11 @@ companyRoute.get("/allemployees/:name", async(req, res)=>{
 
 // search company
 companyRoute.get("/search/:name", async(req, res)=>{
-    const name = req.params.name;
+   
 
     try {
+        const name = req.params.name;
+        
         const company = await companyModel.find({'name': name});
         if(!company) return res.status(404).json({"message": "No such Company exists"});
 

@@ -8,11 +8,12 @@ const companyModel = require("../db/companyModel");
 
 employeeRoute.post("/create", async(req, res)=>{
 
-    const isEmployeeAlreadyExists = await employeeModel.findOne({$and:[{"name": req.body.name}, {"date_of_birth": req.body.date_of_birth}]});
-    if(isEmployeeAlreadyExists) return res.status(409).json({"message": "Employee Already exists"});
-
-
+   
     try {
+        const isEmployeeAlreadyExists = await employeeModel.findOne({$and:[{"name": req.body.name}, {"date_of_birth": req.body.date_of_birth}]});
+        if(isEmployeeAlreadyExists) return res.status(409).json({"message": "Employee Already exists"});
+    
+    
 
         const employee = employeeModel({
             name:req.body.name,
@@ -49,9 +50,10 @@ employeeRoute.get("/all", async(req, res)=>{
 // get employee by id
 employeeRoute.get("/get/:id", async(req, res)=>{
 
-    const emp_id = req.params.id;
+   
 
     try {
+        const emp_id = req.params.id;
 
         const employee = await employeeModel.findById(emp_id);
         res.send(employee);
@@ -67,9 +69,8 @@ employeeRoute.get("/get/:id", async(req, res)=>{
 
 employeeRoute.delete("/:id", async(req, res)=>{
 
-    const emp_id = req.params.id;
-
     try {
+        const emp_id = req.params.id;
 
         const employee = await employeeModel.findByIdAndDelete({"_id":emp_id});
         res.send(employee);
