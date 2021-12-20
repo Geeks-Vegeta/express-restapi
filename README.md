@@ -168,4 +168,8 @@ ID is a path parameter
 
 
 
+<br>
 
+> First create an employee, 
+> After that create a new company 
+> Join that company
